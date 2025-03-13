@@ -1,0 +1,27 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+
+# Structure the Project Modularly
+Generate code that organizes the project into multiple files to improve readability, maintainability, and scalability. Each scene (e.g., start screen, game screen, options menu) must be in its own file. Define game objects (e.g., ball, targets) as separate classes in their own files. Place utilities (e.g., helper functions) and constants (e.g., game settings) in distinct files. Avoid generating a single, giant file that combines all logic into a monolithic codebase.
+
+# Follow Phaser Best Practices
+When writing code, adhere to Phaser's established conventions. Use the preload method to load assets like images and sounds, the create method to initialize game objects such as the ball and HUD, and the update method to handle game logic like input processing and physics updates. Leverage Phaser's scene system to manage different game states seamlessly.
+
+# Manage State Effectively
+Implement local storage to save persistent data, such as high scores and unlocked items, ensuring proper serialization (e.g., JSON.stringify) and deserialization (e.g., JSON.parse). Use Phaser's built-in features, like events or the data manager, to track in-game state, including the current score and remaining balls, keeping the game responsive to player progress.
+
+# Ensure Code Quality
+Generate clean, readable code with meaningful variable names and consistent formatting. Include comments that explain the purpose of functions and any complex logic, such as the swing meter’s 3-click system or physics calculations. This clarity supports collaboration with the AI and future maintenance.
+
+# Optimize for Performance and User Experience
+Write code that loads assets efficiently, such as combining images into sprite sheets to minimize HTTP requests. Ensure the game adapts to various screen sizes using Phaser's scaling options (e.g., scale.mode). Handle user inputs—mouse clicks, touch events, and keyboard controls—smoothly to make the swing mechanic intuitive and enjoyable across devices.
+
+# Utilize Phaser's Physics
+Use Phaser's Arcade Physics system to simulate the ball’s trajectory and detect collisions with targets. Adjust physics parameters like gravity, velocity, and bounce to achieve a realistic yet arcade-style feel that enhances gameplay. Ensure collision detection is precise for scoring accuracy.
+
+# Support Testing and Debugging
+Include unit tests for utility functions (e.g., score calculations) and non-game logic to verify correctness. Utilize Phaser’s debug tools, such as physics.arcade.debug, to visualize physics bodies and collision boxes during development, ensuring the ball and targets behave as intended.
+
