@@ -1,4 +1,7 @@
 // Main configuration file for Range Master game
+import StartScreen from './scenes/StartScreen.js';
+import GameScreen from './scenes/GameScreen.js';
+import OptionsMenu from './scenes/OptionsMenu.js';
 
 // Game configuration
 const config = {
@@ -12,26 +15,10 @@ const config = {
             debug: false
         }
     },
-    scene: {
-        preload: preload,
-        create: create,
-        update: update
-    }
+    scene: [StartScreen, GameScreen, OptionsMenu]
 };
 
 // Initialize the game
 const game = new Phaser.Game(config);
 
-// Empty scene methods
-function preload() {
-    // Assets will be loaded here in future steps
-}
-
-function create() {
-    // Game objects will be created here in future steps
-    console.log('Phaser game initialized successfully');
-}
-
-function update() {
-    // Game logic will be updated here in future steps
-} 
+console.log('Phaser game initialized successfully'); 

@@ -16,6 +16,9 @@ range-master/
 │   └── target-bonus.png # Bonus target with higher point value
 │
 ├── scenes/              # Game scene classes
+│   ├── StartScreen.js   # Main menu scene
+│   ├── GameScreen.js    # Actual gameplay scene
+│   └── OptionsMenu.js   # Options menu scene
 │
 ├── objects/             # Game object classes (ball, targets, etc.)
 │
@@ -34,24 +37,55 @@ range-master/
   - Contains viewport settings for proper mobile display
   - Links to the Phaser CDN
   - Contains basic styling for the game canvas
-  - Links to main.js script
+  - Links to main.js script with type="module" for ES6 module support
 
 #### main.js
 - **Purpose**: Initializes the Phaser game instance with configuration
 - **Key Features**:
+  - Imports the scene classes using ES6 module syntax
   - Defines game dimensions (800x600)
   - Configures the physics engine (Arcade)
-  - Sets up the initial scene
-  - Contains placeholder methods for the default scene (preload, create, update)
+  - Sets up the scene array with all available scenes
+  - Initializes the game with the StartScreen as the default scene
+
+### Scene Files
+
+#### scenes/StartScreen.js
+- **Purpose**: Provides the main menu interface for the game
+- **Key Features**:
+  - Displays the game title "RANGE MASTER"
+  - Presents interactive "PLAY" button that transitions to the GameScreen scene
+  - Presents interactive "OPTIONS" button that transitions to the OptionsMenu scene
+  - Implements hover effects for buttons with color changes
+  - Uses Phaser's text objects for UI elements
+
+#### scenes/GameScreen.js
+- **Purpose**: Contains the actual gameplay elements and mechanics
+- **Key Features**:
+  - Loads and displays the driving range background
+  - Preloads game assets (ball, targets)
+  - Provides a "Back to Menu" button for returning to the StartScreen
+  - Prepared structure for implementing gameplay mechanics in future steps
+  - Will eventually handle ball physics, target interactions, and scoring
+
+#### scenes/OptionsMenu.js
+- **Purpose**: Provides user-configurable settings for the game
+- **Key Features**:
+  - Displays "OPTIONS" title
+  - Implements a togglable sound setting (ON/OFF)
+  - Presents a "BACK" button to return to the StartScreen
+  - Uses state variable (soundEnabled) to track current settings
+  - Demonstrates interactive UI elements with hover effects
 
 ### Directory Purposes
 
 #### scenes/
-- Will contain separate Phaser Scene classes for different game states
-- Future implementation:
-  - StartScreen.js: Main menu scene
-  - GameScreen.js: Actual gameplay scene
-  - Each scene will have its own lifecycle methods (preload, create, update)
+- Contains separate Phaser Scene classes for different game states
+- Each scene implements the standard Phaser lifecycle methods:
+  - constructor: Sets up the scene key
+  - preload: Loads necessary assets
+  - create: Sets up game objects and UI elements
+  - update: Handles frame-by-frame logic (when needed)
 
 #### objects/
 - Will contain classes for game entities
@@ -77,16 +111,32 @@ range-master/
 - Currently includes:
   - background.png: Driving range background
   - ball.png: Golf ball sprite
-  - target sprites
+  - target-standard.png: Standard target sprite
+  - target-bonus.png: Bonus target sprite with higher point value
 
 ## Design Patterns
 
 - **Scene Management**: Using Phaser's built-in scene system for game state management
+  - The game uses a scene-based architecture where each game state is a separate scene
+  - Scenes can transition between each other using scene.start() method
+  - Each scene handles its own asset loading, object creation, and update logic
+
 - **Object-Oriented Approach**: Game entities will be encapsulated in their own classes
+  - Scenes are implemented as ES6 classes extending Phaser.Scene
+  - Future game objects will be implemented as classes with their own properties and methods
+
 - **Component-Based Design**: Objects will have their own properties and behaviors
+  - UI elements like buttons use composition of Phaser's built-in objects with custom event handlers
+  - Future game objects will follow this pattern for extensibility
+
+- **Event-Driven Programming**: 
+  - Interactive elements (buttons) use event listeners for user interaction
+  - Events like 'pointerover', 'pointerout', and 'pointerdown' control UI behavior
 
 ## Technical Decisions
 
 1. **Using Phaser's Arcade Physics**: Provides a lightweight physics engine suitable for this type of game
 2. **Loading Phaser via CDN**: Simplifies setup and reduces local dependencies
 3. **Modular File Structure**: Enhances maintainability and separation of concerns
+4. **ES6 Modules**: Using import/export syntax for better code organization and encapsulation
+5. **Interactive Text as Buttons**: Simplifies UI implementation while maintaining flexibility
