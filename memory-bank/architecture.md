@@ -64,9 +64,12 @@ range-master/
 - **Key Features**:
   - Loads and displays the driving range background
   - Preloads game assets (ball, targets)
+  - Creates and manages the golf ball object from Ball.js
+  - Positions the ball at the bottom center of the screen
+  - Updates the ball's state in the game loop
+  - Handles automatic ball reset when out of bounds or stopped
   - Provides a "Back to Menu" button for returning to the StartScreen
-  - Prepared structure for implementing gameplay mechanics in future steps
-  - Will eventually handle ball physics, target interactions, and scoring
+  - Will eventually handle target interactions and scoring
 
 #### scenes/OptionsMenu.js
 - **Purpose**: Provides user-configurable settings for the game
@@ -88,9 +91,10 @@ range-master/
   - update: Handles frame-by-frame logic (when needed)
 
 #### objects/
-- Will contain classes for game entities
+- Contains classes for game entities and game objects
+- Current implementation:
+  - Ball.js: Golf ball class with physics properties and movement logic
 - Future implementation:
-  - Ball.js: Golf ball class with physics properties
   - Target.js: Targets with collision detection
 
 #### utils/
@@ -140,3 +144,15 @@ range-master/
 3. **Modular File Structure**: Enhances maintainability and separation of concerns
 4. **ES6 Modules**: Using import/export syntax for better code organization and encapsulation
 5. **Interactive Text as Buttons**: Simplifies UI implementation while maintaining flexibility
+
+### Game Object Files
+
+#### objects/Ball.js
+- **Purpose**: Represents the golf ball that players will interact with
+- **Key Features**:
+  - Extends Phaser.Physics.Arcade.Sprite for built-in physics integration
+  - Tracks ball state with isInFlight and isReset flags
+  - Provides methods for launching the ball with physics-based trajectory
+  - Implements collision detection with world boundaries
+  - Handles automatic ball reset when stopped or out of bounds
+  - Manages its own update logic within the Phaser game loop

@@ -1,3 +1,6 @@
+// Import the Ball class from objects directory
+import Ball from '../objects/Ball.js';
+
 class GameScreen extends Phaser.Scene {
     constructor() {
         super('GameScreen');
@@ -14,6 +17,14 @@ class GameScreen extends Phaser.Scene {
     create() {
         // Add background
         this.add.image(400, 300, 'background').setScale(0.8); // Adjust scale as needed
+        
+        // Create the golf ball at the bottom center of the screen
+        const ballX = this.cameras.main.width / 2;
+        const ballY = this.cameras.main.height - 50; // 50 pixels from the bottom
+        this.ball = new Ball(this, ballX, ballY);
+        
+        // Store a reference to the ball for use in update method
+        this.ball.setDepth(1); // Ensure the ball is rendered above the background
         
         // Add temporary text to indicate we're in the game screen
         const gameText = this.add.text(
@@ -53,7 +64,15 @@ class GameScreen extends Phaser.Scene {
     }
 
     update() {
-        // Game logic will go here in future steps
+        // Update the ball if it exists
+        if (this.ball) {
+            this.ball.update();
+            
+            // If the ball is out of bounds or stopped, reset it
+            if (!this.ball.isInFlight && !this.ball.isReset) {
+                this.ball.reset();
+            }
+        }
     }
 }
 

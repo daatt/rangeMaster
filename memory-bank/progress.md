@@ -46,8 +46,29 @@
 - Confirmed interactive buttons respond to hover and click events
 - Validated that assets load correctly in the game scene
 
+### Step 3: Game World - Completed
+- Created `objects/Ball.js`:
+  - Implemented Ball class extending Phaser.Physics.Arcade.Sprite
+  - Added physics properties including collision bounds, bounce, and friction
+  - Implemented ball status tracking (inFlight, reset)
+  - Created methods for resetting and launching the ball
+  - Added update method to detect when ball stops or goes out of bounds
+
+- Updated `scenes/GameScreen.js`:
+  - Imported Ball class
+  - Created ball instance at bottom center of the screen
+  - Added ball update handling in the scene's update method
+  - Set up automatic ball reset when it goes out of bounds or stops
+
+- Post-implementation adjustment:
+  - Reduced ball scale from 0.5 to 0.15 for better proportions
+
+### Tests Completed:
+- Verified background loads correctly in GameScreen
+- Confirmed golf ball appears at the correct position with appropriate size
+- Validated that scene transitions still work properly
+
 ### Next Steps:
-- Proceed to Step 3: Game World
-  - Implement driving range background
-  - Create golf ball object
-  - Set up basic positioning
+- Proceed to Step 4: Swing Meter
+  - Implement swing meter graphics
+  - Create 3-click mechanics for power and accuracy
